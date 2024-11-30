@@ -15,7 +15,7 @@
                 <h2>{{ book.title }}</h2>
                 <p><strong>Author:</strong> {{ book.author }}</p>
                 <p><strong>Rating:</strong> {{ book.rating }}/5</p>
-                <p><strong>Review:</strong> {{ book.review }}</p>
+                <p><strong>Your review:</strong> {{ book.review }}</p>
                 <a href="{{ url_for('delete_book', id=book.id) }}" class="delete-button">Delete</a>
             </div>
             {% endfor %}
