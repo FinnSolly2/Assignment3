@@ -8,7 +8,7 @@ RUN apt-get update && \
     postgresql-contrib \
     libpq-dev \
     gcc \
-    netcat \
+    netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
