@@ -16,6 +16,7 @@ WORKDIR /app
 # Create requirements.txt with specific versions
 RUN echo "Flask==2.0.1\n\
 Flask-SQLAlchemy==2.5.1\n\
+SQLAlchemy==1.4.23\n\
 psycopg2-binary==2.9.1\n\
 python-dotenv==0.19.0\n\
 Werkzeug==2.0.3" > requirements.txt
