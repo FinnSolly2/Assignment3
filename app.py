@@ -1,11 +1,24 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
+from dotenv import load_dotenv
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+load_dotenv()
+
+db = SQLAlchemy()
+
+def create_app():
+    app = Flask(__name__)
+    
+    # Database configuration
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    db.init_app(app)
+    
+    return app
+
+app = create_app()
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,4 +56,3 @@ def delete_book(id):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
