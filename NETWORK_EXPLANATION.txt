@@ -1,0 +1,48 @@
+## Docker Network Configuration
+
+1. Subnet Selection (172.20.0.0/16)
+- We chose the 172.20.0.0/16 subnet for our Docker network because:
+  - It's within the private IPv4 address range (172.16.0.0 - 172.31.255.255)
+  - Provides 65,534 available host addresses (172.20.0.1 - 172.20.255.254)
+  - Minimizes risk of conflicts with common local networks (192.168.0.0/16, 10.0.0.0/8)
+
+2. Static IP Assignment
+- Web Service: 172.20.0.2
+  - First usable address for application container
+  - Easy to remember for debugging
+- Database Service: 172.20.0.3
+  - Sequential allocation for clearer network topology
+  - Consistent addressing for connection strings
+
+3. Impact of Overlapping Subnets
+- Potential Issues:
+  - Network conflicts with existing VPNs or corporate networks
+  - Routing problems between containers and host system
+  - Communication failures with external services
+- Prevention:
+  - Use unique subnet ranges for different environments
+  - Document network allocations
+  - Check for conflicts before deployment
+
+4. DNS Resolution in Docker
+- Container Names as Hostnames:
+  - Docker's embedded DNS server (127.0.0.11)
+  - Automatic service discovery using container names
+  - Example: "db" resolves to 172.20.0.3
+- Benefits:
+  - Service discovery without hardcoded IPs
+  - Easy container replacement without config changes
+  - Built-in load balancing for scaled services
+
+5. Network Security
+- Internal Network Isolation:
+  - Custom bridge network separates containers from host
+  - Inter-container communication restricted to defined network
+  - External access only through published ports
+
+6. Best Practices Implemented
+- Explicit subnet definition
+- Static IP assignment for predictability
+- Service discovery via DNS names
+- Network isolation for security
+
