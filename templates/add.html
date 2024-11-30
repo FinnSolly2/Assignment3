@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Book Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Add New Book Recommendation</h1>
+        <form method="POST" class="add-form">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" required>
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating (1-5):</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" required>
+            </div>
+            <div class="form-group">
+                <label for="review">Review:</label>
+                <textarea id="review" name="review" required></textarea>
+            </div>
+            <button type="submit">Add Book</button>
+        </form>
+        <a href="{{ url_for('index') }}" class="back-button">Back to List</a>
+    </div>
+</body>
+</html>
