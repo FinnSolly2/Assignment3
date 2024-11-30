@@ -24,13 +24,20 @@ Werkzeug==2.0.3" > requirements.txt
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
-# Clone the repository (using HTTPS for public repo)
+# Create a temporary directory for cloning
+WORKDIR /tmp/repo
+
+# Clone the repository
 ARG GITHUB_REPO
 RUN git clone https://github.com/FinnSolly2/Assignment3.git . && \
-    rm -rf .git
+    cp -r * /app/ && \
+    cd /app
 
 # Clean up unnecessary packages
 RUN apt-get purge -y git gcc && \
     apt-get autoremove -y
+
+# Set back to app directory
+WORKDIR /app
 
 CMD ["python", "app.py"]
