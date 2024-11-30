@@ -8,6 +8,7 @@ RUN apt-get update && \
     postgresql-contrib \
     libpq-dev \
     gcc \
+    netcat \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
@@ -41,4 +42,7 @@ RUN apt-get purge -y git gcc && \
 # Set back to app directory
 WORKDIR /app
 
-CMD ["python", "app.py"]
+# Make init.sh executable
+RUN chmod +x init.sh
+
+CMD ["./init.sh"]
